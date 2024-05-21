@@ -2,6 +2,7 @@
 @use 'hero';
 @use 'shows';
 @use 'plans';
+@use 'available-devices';
 
 @font-face {
     font-family: Avenir;
@@ -68,6 +69,8 @@ body {
     @include title(28px)
 }
 
+/*Botões*/
+
 .button {
     display: block;
     width: 100%;
@@ -83,3 +86,43 @@ body {
     cursor: pointer;
 }
 
+/*seções*/
+
+.image-text-section {
+    padding: 5.6vw;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    img {
+        max-width: 100%;
+    }
+
+    &__text-container {
+        align-content: center;
+        padding: 0 2vw;
+        
+        h2 {
+            margin-bottom: 24px;
+        }
+    }
+
+    &__image-full-width {
+        display: block;
+        position: relative;
+
+        img {
+            width: 100%;
+        }
+
+        &__text-container {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            height: 100%;
+            width: calc(50% - 5.6vw);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+    }
+}
