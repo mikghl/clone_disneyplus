@@ -1,6 +1,13 @@
 const testandoGulp = require('gulp');
 const testandoSass = require('gulp-sass')(require('sass'));
-const imagemin = require('gulp-imagemin');
+const testandoImagemin = require('gulp-imagemin');
+const testandoUglify = require('gulp-uglify');
+
+function scripts() {
+    return testandoGulp.src('./src/scripts/*.js')
+        .pipe(testandoUglify())
+        .pipe(testandoGulp.dest('./dist/js'))
+}
 
 
 function styles() {
@@ -11,11 +18,13 @@ function styles() {
 
 function images() {
     return testandoGulp.src('./src/images/**/*', { econding: false })
-        .pipe(imagemin())
+        .pipe(testandoImagemin())
         .pipe(testandoGulp.dest('./dist/images'));
 }
 
-exports.default = testandoGulp.parallel(styles, images);
+exports.default = testandoGulp.parallel(styles, images, scripts);
+
 exports.watch = function() {
     testandoGulp.watch('./src/styles/*.scss', testandoGulp.parallel(styles));
+    testandoGulp.watch('./src/scripts/*.js', testandoGulp.parallel(scripts));
 }
